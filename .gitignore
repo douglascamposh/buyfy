@@ -1,0 +1,9 @@
+node_modules/
+.meteor/local/
+client/semantic/definitions/
+client/semantic/site/
+client/semantic/themes/
+client/semantic/.custom.semantic.json
+client/semantic/semantic.less
+client/semantic/theme.config.import.less
+client/semantic/theme.import.less

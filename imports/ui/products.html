@@ -1,0 +1,32 @@
+<body>
+  <div>
+    <header>
+      <h1>Productos</h1>
+    </header>
+    <div class="ui items">
+      {{#each products}}
+        {{> product}}
+      {{/each}}
+    </div>
+  </div>
+</body>
+
+<template name="product">
+  <div class="item">
+    <div class="image">
+      <img src="/image.png">
+    </div>
+    <div class="content">
+      <a class="header">{{name}}</a>
+      <div class="meta">
+        <span>{{description}}</span>
+      </div>
+      <div class="description">
+        <p></p>
+      </div>
+      <div class="extra">
+        {{price}} USD
+      </div>
+    </div>
+  </div>
+</template>
