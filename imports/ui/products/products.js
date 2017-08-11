@@ -3,7 +3,6 @@ import { Template } from 'meteor/templating';
 import './products.html';
 
 Template.products.onCreated(function() {
-  const self = this;
   Meteor.subscribe('products');
 });
 
