@@ -1,15 +1,22 @@
+<template name="products">
 <body>
   <div>
     <header>
-      <h1>Productos</h1>
+      <h1>Lista de Productos</h1>
     </header>
+    {{> newProduct}}
     <div class="ui items">
-      {{#each products}}
-        {{> product}}
-      {{/each}}
+      {{#if Template.subscriptionsReady }}
+        {{#each products}}
+          {{> product}}
+        {{/each}}
+      {{else}}
+        <p>Loading</p>
+      {{/if}}
     </div>
   </div>
 </body>
+</template>
 
 <template name="product">
   <div class="item">
@@ -17,7 +24,7 @@
       <img src="/image.png">
     </div>
     <div class="content">
-      <a class="header">{{name}}</a>
+      <a class="header" href="/products/{{_id}}">{{name}}</a>
       <div class="meta">
         <span>{{description}}</span>
       </div>
