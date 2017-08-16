@@ -14,6 +14,10 @@ ProductSchema = new SimpleSchema({
     type: String,
     label: "Description"
   },
+  price: {
+    type: Number,
+    label: "Price"
+  },
   createdAt: {
     type: Date,
     label: "Created at",

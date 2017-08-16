@@ -16,13 +16,11 @@ es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers
 ecmascript@0.8.1              # Enable ECMAScript2015+ syntax in app code
 shell-server@0.2.4            # Server-side component of the `meteor shell` command
 
-semantic:ui
-juliancwirko:postcss
-less@2.7.9
-jquery@1.11.10
 kadira:flow-router
 kadira:blaze-layout
 aldeed:collection2
 aldeed:autoform
 accounts-ui
 accounts-password
+standard-minifier-css
+twbs:bootstrap
