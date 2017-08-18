@@ -1,11 +1,11 @@
 import { Mongo } from 'meteor/mongo';
-const Products = new Mongo.Collection('products');
-Products.allow({
+const Categories = new Mongo.Collection('categories');
+Categories.allow({
   insert: function(userId, doc) {
     return !userId;
   }
 });
-ProductSchema = new SimpleSchema({
+CategorySchema = new SimpleSchema({
   name: {
     type: String,
     label: "Name"
@@ -13,10 +13,6 @@ ProductSchema = new SimpleSchema({
   description: {
     type: String,
     label: "Description"
-  },
-  price: {
-    type: Number,
-    label: "Price"
   },
   createdAt: {
     type: Date,
@@ -30,5 +26,5 @@ ProductSchema = new SimpleSchema({
   }
 });
 
-Products.attachSchema(ProductSchema);
-export {Products};
+Categories.attachSchema(CategorySchema);
+export {Categories};
