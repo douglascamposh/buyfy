@@ -9,3 +9,13 @@ Template.products.onCreated(function() {
 Template.products.helpers({
   products: () => Products.find({})
 });
+
+Template.product.helpers({
+  getLastCost: (costs) => {
+    if(costs) {
+      const cost = costs.pop();
+      return cost ? cost.price : "";
+    }
+    return "";
+  }
+});
