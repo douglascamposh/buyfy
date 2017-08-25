@@ -2,7 +2,7 @@ import { Mongo } from 'meteor/mongo';
 const Categories = new Mongo.Collection('categories');
 Categories.allow({
   insert: function(userId, doc) {
-    return !userId;
+    return !!userId;
   }
 });
 CategorySchema = new SimpleSchema({

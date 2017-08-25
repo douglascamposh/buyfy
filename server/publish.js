@@ -1,5 +1,6 @@
 import { Products } from '../imports/api/products.js';
 import { Categories } from '../imports/api/categories.js';
+import '../imports/api/cart.js';
 Meteor.publish('products', function() {
   return Products.find({});
 });

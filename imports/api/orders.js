@@ -2,7 +2,7 @@ import { Mongo } from 'meteor/mongo';
 const Orders = new Mongo.Collection('orders');
 Orders.allow({
   insert: function(userId, doc) {
-    return !userId;
+    return !!userId;
   }
 });
 
@@ -33,7 +33,7 @@ ProductRef = new SimpleSchema({
 });
 
 OrderSchema = new SimpleSchema({
-  Products: {
+  products: {
       type: [ProductRef]
   },
   total: {
@@ -44,14 +44,14 @@ OrderSchema = new SimpleSchema({
     }
   },
   user: {
-      type: String,
-      label: "User",
-      autoValue: function() {
-          return this.userId
-      },
-      autoform: {
-          type: "hidden"
-      }
+    type: String,
+    label: "User",
+    autoValue: function() {
+        return this.userId
+    },
+    autoform: {
+        type: "hidden"
+    }
   },
   createdAt: {
     type: Date,

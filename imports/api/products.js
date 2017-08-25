@@ -2,7 +2,7 @@ import { Mongo } from 'meteor/mongo';
 const Products = new Mongo.Collection('products');
 Products.allow({
   insert: function(userId, doc) {
-    return !userId;
+    return !!userId;
   }
 });
 
