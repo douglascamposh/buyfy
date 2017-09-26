@@ -46,6 +46,15 @@ ProductSchema = new SimpleSchema({
     autoform: {
       type: "hidden"
     }
+  },
+  visible: {
+    type: Boolean,
+    autoValue: function() {
+      return true;
+    },
+    autoform: {
+      type: "hidden"
+    }
   }
 });
 
