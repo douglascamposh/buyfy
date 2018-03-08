@@ -7,3 +7,5 @@ import '../imports/ui/categories/newCategory.js';
 import '../imports/ui/categories/categories.js';
 
 import '../imports/ui/favorites/favorites.js';
+
+import '../imports/ui/user/accountView.js';
