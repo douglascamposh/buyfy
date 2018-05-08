@@ -1,0 +1,46 @@
+<template name="cart">
+<body>
+  <div>
+    <header>
+      <h1>Lista de Productos carts</h1>
+    </header>
+      {{#if Template.subscriptionsReady }}
+        {{#each carts}}
+          {{> cartDetail}}
+        {{/each}}
+      {{else}}
+        <p>Loading</p>
+      {{/if}}
+      <a class="btn btn-default checkout-all" href="/products/{{_id}}">Pagar Todo</a>
+  </div>
+</body>
+</template>
+
+<template name="cartDetail">
+  <div class="row">
+    <div class="col-xs-1 col-sm-1 col-md-3 col-lg-3"></div>
+    <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
+      <div class="item">
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 col-md-6 col-lg-6">
+            <div class="thumbnail">
+              <a href="/product/{{_id}}">
+                <img src="/image.png">
+              </a>
+            </div>
+          </div>
+          <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6">
+              <h4><a href="/product/{{_id}}">{{product.name}}</a></h4>
+              <p>$ {{product.price}}</p>
+              <div class="row">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                  <button class="btn btn-default"> <span class="glyphicon glyphicon-shopping-cart"></span> Mover a Favoritos</button>
+                  <button class="btn btn-default"> <span class="glyphicon glyphicon-trash"></span></button>
+                  <a class="btn btn-default checkout" href="/orders/{{_id}}">Pagar solo este articulo</a>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
