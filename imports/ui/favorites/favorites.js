@@ -8,7 +8,7 @@ Template.favorites.onCreated(function() {
 });
 
 Template.favorites.helpers({
-  products: () => Favorites.find({})
+  favorites: () => Favorites.find({})
 });
 
 Template.favorite.helpers({

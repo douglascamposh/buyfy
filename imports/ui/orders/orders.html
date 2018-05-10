@@ -1,0 +1,167 @@
+<template name="orders">
+<body>
+  <div>
+    <header>
+      <h1>Lista de Ordenes</h1>
+    </header>
+    <div class="row">
+      <a class="btn btn-default checkout">Confirmar Pedido</a>
+    </div>
+    {{#if Template.subscriptionsReady }}
+    <div class="row">
+        <div class="col-xs-1 col-sm-1 col-md-3 col-lg-3"></div>
+        {{> address}}
+        <div class="col-xs-1 col-sm-1 col-md-3 col-lg-3">
+          <div class="hidden-address">
+            <span class="glyphicon glyphicon-chevron-down"></span>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="address-view">
+        <div class="form-address">
+          {{> addAddress}}
+        </div>
+        <div class="address-list">
+          {{> addresses}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {{#each products}}
+        {{> order}}
+      {{/each}}
+    </div>
+    {{else}}
+      <p>Loading</p>
+    {{/if}}
+  </div>
+</body>
+</template>
+
+<template name="order">
+  <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+    <div class="item">
+      <div class="thumbnail">
+        <a href="/products/{{_id}}">
+          <img src="/image.png">
+        </a>
+        <div class="caption">
+          <h4><a href="/products/{{_id}}">{{product.name}}</a></h4>
+          <p>{{product.description}}</p>
+          <div class="row">
+              <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+              <button class="btn btn-default remove-favorite"> <span class="glyphicon glyphicon-trash"></span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="address">
+    <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
+      <address>
+        <strong>{{address.name}} {{address.lastname}}</strong><br>
+        {{address.line1}}, {{address.line2}}<br>
+        {{address.city}}, {{address.state}} {{address.postalCode}}<br>
+        <abbr title="Telefono">Telefono:</abbr> {{address.phoneNumber}}
+      </address>
+    </div>
+</template>
+
+<template name="addAddress">
+  <div class="row">
+    <div class="col-xs-1 col-sm-1 col-md-3 col-lg-3"></div>
+    <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
+      <div class="row">
+        <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
+            <label for="country">Pais</label>
+            <input type="text" class="form-control" id="country" placeholder="Pais">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
+          <label for="name">Nombre</label>
+          <input type="text" class="form-control" id="name" placeholder="Nombre">
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
+          <label for="lastname">Apellido</label>
+          <input type="text" class="form-control" id="lastname" placeholder="Apellido">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
+          <label for="address">Direccion</label>
+          <input type="text" class="form-control" id="line1" placeholder="Direccion">
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
+          <label for="address2">Direccion (cont.)</label>
+          <input type="text" class="form-control" id="line2" placeholder="Direccion (cont.)">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-10 col-sm-10 col-md-4 col-lg-4">
+          <label for="city">Ciudad</label>
+          <input type="text" class="form-control" id="city" placeholder="Ciudad">
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-4 col-lg-4">
+          <label for="state">Estado o provincia</label>
+          <input type="text" class="form-control" id="state" placeholder="Estado o provincia">
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-4 col-lg-4">
+          <label for="postalCode">Codigo Postal</label>
+          <input type="text" class="form-control" id="postalCode" placeholder="Codigo Postal">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
+          <label for="phoneNumber">Numero de Telefono</label>
+          <input type="text" class="form-control" id="phoneNumber" placeholder="Numero de Telefono">
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
+          <label for="phoneExtn">Celular</label>
+          <input type="text" class="form-control" id="phoneExtn" placeholder="Celular">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
+          <label for="defaultAddress">Guardar como dirección principal</label>
+          <input type="checkbox" id="defaultAddress" placeholder="Guardar como dirección principal">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
+          <a class="btn btn-default address-cancel">Cancelar</a>
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
+          <a class="btn btn-primary add-address">Agregar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="addresses">
+  {{#each addresses}}
+    <div class="row">
+      <div class="check-address">
+        <div class="col-xs-1 col-sm-1 col-md-3 col-lg-3">
+          <input class="right" type="checkbox" checked="{{defaultAddress}}">
+          <input class="right" name="createdAt" type="hidden" value="{{createdAt}}">
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
+          <address>
+            <strong>{{name}} {{lastname}}</strong><br>
+            {{line1}}, {{line2}}<br>
+            {{city}}, {{state}} {{postalCode}}<br>
+            <abbr title="Telefono">Telefono:</abbr> {{phoneNumber}}
+          </address>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+  <div class="col-xs-1 col-sm-1 col-md-3 col-lg-3">
+    <a class="btn btn-primary address-form">Añadir nueva dirección</a>
+  </div>
+</template>
