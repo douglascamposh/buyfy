@@ -15,3 +15,10 @@ Template.mainLayout.onRendered(function () {
     $(".menu-overlay").fadeOut(500);
   });
 });
+
+Template.mainLayout.events({
+  'click .hide-menu'() {
+    $(".navbar-toggle").trigger("click");
+    $(".menu-overlay").fadeOut(500);
+  }
+});

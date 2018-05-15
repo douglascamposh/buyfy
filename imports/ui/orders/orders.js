@@ -12,7 +12,7 @@ Template.orders.onCreated(function() {
 });
 
 Template.orders.helpers({
-  products: () => Cart.find({})
+  cartProducts: () => Cart.find({})
 });
 
 Template.address.helpers({
@@ -35,6 +35,7 @@ Template.orders.events({
   'click .checkout'() {
     const carts = Cart.find({})
     const order = {};
+    const userAddress = Meteor.user().profile.address.find(address => address.defaultAddress);
     const products = carts.map(cart => {
       const lineItem = {};
       lineItem.productId = cart.product.productId;
@@ -48,7 +49,7 @@ Template.orders.events({
     });
     order.products = products;
     order.total = products.reduce((total, product) => { return product.unitPrice + total}, 0); //add sales tax too
-    const shipTo = {name: "Av. simon Lopez", line1: "no se" , line2:"tampoco se", city: "Cochabmba", country: "bolivia", state: "Cochabmba", phoneNumber: "70770785",phoneExtn:"4510673", createdAt: new Date(), updateAt: new Date()};
+    const shipTo = {name: userAddress.name, line1: userAddress.line1 , line2: userAddress.line2, city: userAddress.city, country: userAddress.country, state: userAddress.state, phoneNumber: userAddress.phoneNumber, phoneExtn: userAddress.phoneExtn, createdAt: new Date(), updateAt: new Date()};
     const shipFrom = {name: "Av. simon Lopez", line1: "no se" , line2:"tampoco se", city: "Cochabmba", country: "bolivia", state: "Cochabmba", phoneNumber: "70770785",phoneExtn:"4510673", createdAt: new Date(), updateAt: new Date()};
     const shippingMethod = {name: "Fedex", carrier:"Fedex", price: 5, saleTax:2, cost: 4, expectedDelivery:"2/2/2018"};
     order.shipment = {shipTo, shipFrom, shippingMethod};
@@ -58,9 +59,13 @@ Template.orders.events({
     order.customerIP = "192.168.1.10"; //check how to get the ip
     order.shippedAt = new Date(); // this should the date of the expected Deliveryd
 
-    Meteor.call('order.insert', {
-      order
-    });
+    Meteor.call('order.insert', order, (err, done) => {
+      if (done) {
+        FlowRouter.redirect('/ordersDetails');
+      } else {
+        console.warn("I have to display message error");
+      }
+    });//redirigir a la pantalla el producto esta siendo procesado para el envio, hacer una pantalla q muestre el estado de los pedidos, crear order details, refactorizar address view
   },
   'click .hidden-address'() {
     const addressList = $('.address-view');
