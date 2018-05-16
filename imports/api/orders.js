@@ -143,14 +143,14 @@ Orders.attachSchema(OrderSchema);
 export {Orders};
 
 Meteor.methods({
-  'order.insert'({order}) {
+  'order.insert'(order) {
     check(order, Object);
     if (!Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
     order.orderNumber = order.orderNumber || Math.floor(Math.random()*10000); //replace this should be sequencial
-    Orders.update(
-      { userId: Meteor.userId(), 'order.orderNumber': order.orderNumber },
+    const done = Orders.update(
+      { userId: Meteor.userId(), orderNumber: order.orderNumber },
       {
         $set: {
           products: order.products
@@ -180,5 +180,6 @@ Meteor.methods({
       },
       { upsert: true, validate: false }
     );
+    return done;
   },
 });
